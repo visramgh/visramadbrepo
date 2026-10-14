@@ -39,9 +39,14 @@ resources:
           environment_key: default
         - task_key: refresh_pipeline
           depends_on:
-            - task_key: notebook_task
+        - task_key: notebook_task
           pipeline_task:
             pipeline_id: ${resources.pipelines.DAB_Practice_Project_etl.id}
+        - task_key: vehicle_json_practice_task
+          depends_on:
+            - task_key: notebook_task
+          notebook_task:
+            notebook_path: ../src/vehicle_json_practice.ipynb
 
       environments:
         - environment_key: default
